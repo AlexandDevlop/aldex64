@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aldex64 | Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2e0e6ad61.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Montserrat, sans-serif;
+            background: linear-gradient(135deg, #0b0f19 0%, #1a1f2e 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(90deg, #111727 0%, #1a2139 100%);
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            margin: 40px 0 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        h2 i {
+            color: #ff6b6b;
+        }
+
+        h4 {
+            text-align: center;
+            font-size: 16px;
+            color: #a0a9b8;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        .cards-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            justify-items: center;
+        }
+
+        .card {
+            width: 280px;
+            height: 120px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            transition: background 0.3s ease;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+        }
+
+        .card:hover::before {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            text-decoration: none;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 2;
+            transition: text-shadow 0.3s ease;
+            gap: 10px;
+        }
+
+        .card:hover a {
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 1);
+        }
+
+        .mario-card {
+            background-image: url('https://i.ytimg.com/vi/8j1NjIINbBI/maxresdefault.jpg');
+        }
+
+        .tutoriales-card {
+            background-image: url('https://i.ytimg.com/vi/sKpNHLjajrc/maxresdefault.jpg');
+        }
+
+        footer {
+            background: linear-gradient(90deg, #111727 0%, #1a2139 100%);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
+            margin-top: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 0, 0, 0.3);
+            border-color: rgba(255, 0, 0, 0.6);
+            transform: translateY(-5px);
+        }
+
+        .discord:hover {
+            background: rgba(88, 101, 242, 0.3);
+            border-color: rgba(88, 101, 242, 0.6);
+        }
+
+        .youtube:hover {
+            background: rgba(255, 0, 0, 0.3);
+            border-color: rgba(255, 0, 0, 0.6);
+        }
+
+        .twitter:hover {
+            background: rgba(29, 155, 240, 0.3);
+            border-color: rgba(29, 155, 240, 0.6);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #7a8399;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 28px;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+                margin: 30px 0 8px;
+            }
+
+            h4 {
+                font-size: 14px;
+                margin-bottom: 40px;
+            }
+
+            .cards-wrapper {
+                gap: 30px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header><i class="fas fa-star"></i> Aldex64 <i class="fas fa-star"></i></header>
+    
+    <div class="container">
+        <h2><i class="fas fa-gamepad"></i>Encuentra lo mejor de Aldex64 aquí</h2>
+        <h4>¿Qué es lo que buscas?</h4>
+
+        <div class="cards-wrapper">
+            <div class="card mario-card">
+                <a href="sm64.html"><i class="fas fa-download"></i>Super Mario 64</a>
+            </div>
+            <div class="card tutoriales-card">
+                <a href="tutoriales.html"><i class="fas fa-video"></i>Tutoriales</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://discord.gg/9NXDBAS3xn" target="_blank" class="social-link discord" title="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://youtube.com/@aldex64" target="_blank" class="social-link youtube" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://x.com/Aldex64?s=20" target="_blank" class="social-link twitter" title="X/Twitter">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+        </div>
+        <div class="footer-text">
+            <p>&copy; 2025 Aldex64. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
