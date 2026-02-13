@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aldex64 | Inicio</title>
-        <link rel="shortcut icon" href="https://i.imgur.com/5V0Yo3v.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Descubre los mejores recursos de Super Mario 64, tutoriales!">
+    <link rel="shortcut icon" href="https://i.imgur.com/5V0Yo3v.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a2e0e6ad61.js" crossorigin="anonymous"></script>
     <style>
+        /* Variables CSS para fácil personalización */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0b0f1a 0%, #1a1f2c 100%);
+            --card-gradient: linear-gradient(145deg, #1e2433, #141824);
+            --accent-color: #ff6b6b;
+            --accent-hover: #ff8787;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c1d1;
+            --header-bg: linear-gradient(90deg, #0c0f16 0%, #1a1f2a 100%);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,72 +32,149 @@
         }
 
         body {
-            font-family: Montserrat, sans-serif;
-            background: linear-gradient(135deg, #0b0f19 0%, #1a1f2e 100%);
-            color: white;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--primary-gradient);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efecto de fondo animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,107,107,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,107,107,0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         header {
-            background: linear-gradient(90deg, #111727 0%, #1a2139 100%);
-            padding: 30px 20px;
+            background: var(--header-bg);
+            padding: 40px 20px;
             text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(255,107,107,0.3);
+            z-index: 10;
+        }
+
+        /* Efecto de brillo en header */
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shine 8s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
+            50% { transform: translateX(30%) translateY(30%) rotate(10deg); }
+            100% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
+        }
+
+        header i {
+            color: var(--accent-color);
+            margin: 0 10px;
+            filter: drop-shadow(0 0 10px rgba(255,107,107,0.5));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
             flex: 1;
+            position: relative;
+            z-index: 10;
+            width: 100%;
         }
 
         h2 {
             text-align: center;
-            font-size: 28px;
-            margin: 40px 0 10px;
+            font-size: 32px;
+            margin: 20px 0 10px;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: var(--card-gradient);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
         }
 
         h2 i {
-            color: #ff6b6b;
+            color: var(--accent-color);
+            font-size: 36px;
         }
 
         h4 {
             text-align: center;
-            font-size: 16px;
-            color: #a0a9b8;
+            font-size: 18px;
+            color: var(--text-secondary);
             margin-bottom: 50px;
-            font-weight: 400;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 30px;
+            background: rgba(255,107,107,0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,107,107,0.2);
         }
 
         .cards-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
             justify-items: center;
+            margin: 30px 0;
         }
 
         .card {
-            width: 280px;
-            height: 120px;
-            border-radius: 12px;
+            width: 100%;
+            max-width: 320px;
+            height: 160px;
+            border-radius: var(--border-radius);
             background-size: cover;
             background-position: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            /* CORREGIDO: Opacidad inicial en 1, no 0 */
+            opacity: 1;
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .card::before {
@@ -90,18 +184,35 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            transition: background 0.3s ease;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+            transition: var(--transition);
             z-index: 1;
         }
 
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+            z-index: 2;
+        }
+
         .card:hover {
-            transform: scale(1.08) translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(255,107,107,0.5);
         }
 
         .card:hover::before {
-            background: rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, rgba(255,107,107,0.3) 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .card:hover::after {
+            left: 100%;
         }
 
         .card:active {
@@ -112,23 +223,39 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             width: 100%;
             height: 100%;
             color: white;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
             text-decoration: none;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
             position: relative;
-            z-index: 2;
-            transition: text-shadow 0.3s ease;
+            z-index: 3;
+            transition: var(--transition);
             gap: 10px;
+            letter-spacing: 1px;
+        }
+
+        .card a i {
+            font-size: 36px;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover a i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .card:hover a {
-            text-shadow: 0 3px 12px rgba(0, 0, 0, 1);
+            text-shadow: 0 6px 20px rgba(0, 0, 0, 1);
+            letter-spacing: 2px;
         }
 
+        /* Mejora de imágenes de fondo con overlay */
         .mario-card {
             background-image: url('https://i.ytimg.com/vi/8j1NjIINbBI/maxresdefault.jpg');
         }
@@ -138,95 +265,223 @@
         }
 
         .redes-card {
-            background-image: url(https://static.vecteezy.com/system/resources/previews/047/131/920/original/social-media-icons-background-free-vector.jpg);
+            background-image: url('https://static.vecteezy.com/system/resources/previews/047/131/920/original/social-media-icons-background-free-vector.jpg');
         }
 
         footer {
-            background: linear-gradient(90deg, #111727 0%, #1a2139 100%);
-            padding: 30px 20px;
+            background: var(--header-bg);
+            padding: 50px 20px 30px;
             text-align: center;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
-            margin-top: 40px;
+            position: relative;
+            margin-top: 60px;
+            border-top: 2px solid rgba(255,107,107,0.2);
+            z-index: 10;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
+            gap: 25px;
+            margin-bottom: 25px;
         }
 
         .social-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 20px;
+            transition: var(--transition);
+            font-size: 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .social-link img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            filter: invert(100%);
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .social-link:hover {
-            background: rgba(255, 0, 0, 0.3);
-            border-color: rgba(255, 0, 0, 0.6);
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.1);
+            border-color: var(--accent-color);
+            background: rgba(255,107,107,0.15);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link:hover img {
+            transform: scale(1.1);
         }
 
         .discord:hover {
-            background: rgba(88, 101, 242, 0.3);
-            border-color: rgba(88, 101, 242, 0.6);
+            background: rgba(88, 101, 242, 0.2);
+            border-color: #5865F2;
         }
 
         .youtube:hover {
-            background: rgba(255, 0, 0, 0.3);
-            border-color: rgba(255, 0, 0, 0.6);
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #FF0000;
         }
 
         .twitter:hover {
-            background: rgba(29, 155, 240, 0.3);
-            border-color: rgba(29, 155, 240, 0.6);
+            background: rgba(29, 155, 240, 0.2);
+            border-color: #1DA1F2;
         }
 
         .footer-text {
-            font-size: 12px;
-            color: #7a8399;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
+        /* Animación de entrada para tarjetas - CORREGIDO */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Retrasos de animación */
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-gradient);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff6b6b, #ff8e8e);
+            border-radius: 6px;
+            border: 3px solid var(--primary-gradient);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff8787, #ffa0a0);
+        }
+
+        /* Media Queries mejoradas */
         @media (max-width: 768px) {
             header {
-                font-size: 28px;
-                padding: 20px;
+                font-size: 32px;
+                padding: 30px 20px;
             }
 
             h2 {
-                font-size: 22px;
-                margin: 30px 0 8px;
+                font-size: 24px;
+                padding: 15px;
+                gap: 10px;
+            }
+
+            h2 i {
+                font-size: 28px;
+            }
+
+            h4 {
+                font-size: 16px;
+                padding: 8px 20px;
+                margin-bottom: 30px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .cards-wrapper {
+                gap: 25px;
+            }
+
+            .card {
+                height: 140px;
+                max-width: 100%;
+            }
+
+            .card a {
+                font-size: 20px;
+            }
+
+            .card a i {
+                font-size: 30px;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-link img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 26px;
+                padding: 20px 15px;
+            }
+
+            h2 {
+                font-size: 20px;
+                flex-direction: column;
             }
 
             h4 {
                 font-size: 14px;
-                margin-bottom: 40px;
-            }
-
-            .cards-wrapper {
-                gap: 30px;
+                white-space: nowrap;
             }
 
             .card {
-                width: 100%;
-                max-width: 280px;
+                height: 130px;
+            }
+
+            .card a {
+                font-size: 18px;
+            }
+
+            .card a i {
+                font-size: 26px;
             }
 
             .social-links {
@@ -234,52 +489,96 @@
             }
 
             .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
+                width: 45px;
+                height: 45px;
             }
+
+            .social-link img {
+                width: 22px;
+                height: 22px;
+            }
+        }
+
+        /* Soporte para modo oscuro del sistema */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-gradient: linear-gradient(135deg, #080b12 0%, #141823 100%);
+                --card-gradient: linear-gradient(145deg, #1a1f2b, #11151e);
+            }
+        }
+
+        /* Mejora de accesibilidad */
+        .card:focus-visible,
+        .social-link:focus-visible {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+
+        /* Animación de carga para imágenes */
+        @keyframes imageLoad {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .mario-card, .tutoriales-card, .redes-card {
+            animation: imageLoad 0.8s ease;
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7207868307854402"
      crossorigin="anonymous"></script>
 </head>
 <body>
-    <header><i class="fas fa-star"></i> Aldex64 <i class="fas fa-star"></i></header>
+    <header>
+        <i class="fas fa-star"></i> 
+        Aldex64 
+        <i class="fas fa-star"></i>
+    </header>
     
     <div class="container">
-        <h2><i class="fas fa-gamepad"></i>Encuentra lo mejor de Aldex64 aquí</h2>
+        <h2>
+            <i class="fas fa-gamepad"></i>
+            Encuentra lo mejor de Aldex64 aquí
+        </h2>
         <h4>¿Qué es lo que buscas?</h4>
 
         <div class="cards-wrapper">
-            <div class="card mario-card">
-                <a href="sm64.html"><i class="fas fa-download"></i>Super Mario 64</a>
+            <div class="card mario-card" role="article">
+                <a href="sm64.html" aria-label="Descargar Super Mario 64">
+                    <i class="fas fa-download"></i>
+                    Super Mario 64
+                </a>
             </div>
-            <div class="card tutoriales-card">
-                <a href="tutoriales.html"><i class="fas fa-video"></i>Tutoriales</a>
+            <div class="card tutoriales-card" role="article">
+                <a href="tutoriales.html" aria-label="Ver tutoriales">
+                    <i class="fas fa-video"></i>
+                    Tutoriales
+                </a>
             </div>
-            <div class="card redes-card">
-                <a href="redes.html"><i class="fas fa-share-alt"></i>Redes</a>
+            <div class="card redes-card" role="article">
+                <a href="redes.html" aria-label="Ver redes sociales">
+                    <i class="fas fa-share-alt"></i>
+                    Redes
+                </a>
             </div>
         </div>
     </div>
 
     <footer>
         <div class="social-links">
-            <a href="https://discord.gg/9NXDBAS3xn" target="_blank" class="social-link discord" title="Discord">
-                <img src="https://i.imgur.com/1pDObUV.png" alt="Discord">
+            <a href="https://discord.gg/NESqtHkvPw" target="_blank" class="social-link discord" title="Únete a Discord" aria-label="Discord">
+                <img src="https://i.imgur.com/1pDObUV.png" alt="Discord" loading="lazy">
             </a>
-            <a href="https://youtube.com/@aldex64" target="_blank" class="social-link youtube" title="YouTube">
-                <img src="https://i.imgur.com/MdOlunX.png" alt="YouTube">
+            <a href="https://youtube.com/@aldex64" target="_blank" class="social-link youtube" title="Visita YouTube" aria-label="YouTube">
+                <img src="https://i.imgur.com/MdOlunX.png" alt="YouTube" loading="lazy">
             </a>
-            <a href="https://x.com/Aldex64?s=20" target="_blank" class="social-link twitter" title="X/Twitter">
-                <img src="https://i.imgur.com/CIfFbY3.png" alt="X">
+            <a href="https://x.com/Aldex64?s=20" target="_blank" class="social-link twitter" title="Síguenos en X" aria-label="X/Twitter">
+                <img src="https://i.imgur.com/CIfFbY3.png" alt="X" loading="lazy">
             </a>
         </div>
         <div class="footer-text">
-            <p>&copy; 2024 Aldex64. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Aldex64. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">La comunidad de sm64</p>
         </div>
     </footer>
 </body>
 </html>
-
-
