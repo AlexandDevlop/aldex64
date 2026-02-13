@@ -9,22 +9,28 @@
     <link rel="shortcut icon" href="https://i.imgur.com/5V0Yo3v.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/a2e0e6ad61.js" crossorigin="anonymous"></script>
     <style>
+        /* Variables CSS - Consistencia con el sitio principal */
         :root {
             --primary-gradient: linear-gradient(135deg, #0b0f1a 0%, #1a1f2c 100%);
             --card-gradient: linear-gradient(145deg, #1e2433, #141824);
             --accent-color: #ff6b6b;
+            --accent-hover: #ff8787;
             --text-primary: #ffffff;
             --text-secondary: #b8c1d1;
             --header-bg: linear-gradient(90deg, #0c0f16 0%, #1a1f2a 100%);
-            --shadow-sm: 0 8px 20px rgba(0,0,0,0.3);
-            --shadow-md: 0 12px 30px rgba(0,0,0,0.4);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.5);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
             --border-radius: 16px;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
         body {
             font-family: 'Montserrat', sans-serif;
             background: var(--primary-gradient);
@@ -32,545 +38,1115 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
             overflow-x: hidden;
         }
 
+        /* Efecto de fondo animado */
         body::before {
             content: '';
-            position: fixed; inset: 0;
-            background:
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
                 radial-gradient(circle at 20% 50%, rgba(255,107,107,0.03) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(255,107,107,0.03) 0%, transparent 50%);
-            pointer-events: none; z-index: 0;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* ── HEADER ── */
         header {
             background: var(--header-bg);
-            padding: 30px 20px; text-align: center;
-            font-size: 36px; font-weight: 800; cursor: pointer;
-            transition: var(--transition); box-shadow: var(--shadow-md);
-            letter-spacing: 4px; position: relative; overflow: hidden;
-            border-bottom: 2px solid rgba(255,107,107,0.3); z-index: 10;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            letter-spacing: 4px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(255,107,107,0.3);
+            z-index: 10;
         }
+
+        /* Efecto de brillo en header */
         header::after {
             content: '';
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shine 8s infinite; pointer-events: none;
+            animation: shine 8s infinite;
+            pointer-events: none;
         }
+
         @keyframes shine {
-            0%   { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
-            50%  { transform: translateX(30%)  translateY(30%)  rotate(10deg); }
+            0% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
+            50% { transform: translateX(30%) translateY(30%) rotate(10deg); }
             100% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
         }
-        header:hover { background: linear-gradient(90deg, #1a1f2a 0%, #252b3a 100%); letter-spacing: 6px; }
-        header i { color: var(--accent-color); margin: 0 10px; filter: drop-shadow(0 0 10px rgba(255,107,107,0.5)); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
 
-        /* ── LAYOUT ── */
-        .container { max-width:1300px; margin:0 auto; padding:40px 20px; flex:1; position:relative; z-index:10; width:100%; }
+        header:hover {
+            background: linear-gradient(90deg, #1a1f2a 0%, #252b3a 100%);
+            letter-spacing: 6px;
+        }
 
+        header i {
+            color: var(--accent-color);
+            margin: 0 10px;
+            filter: drop-shadow(0 0 10px rgba(255,107,107,0.5));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .container { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            flex: 1;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+        
+        /* Botón Back mejorado */
         .back-btn {
-            display:inline-flex; align-items:center; gap:10px; margin-bottom:30px;
-            padding:12px 24px; background:rgba(255,255,255,0.05);
-            border:1px solid rgba(255,255,255,0.1); color:white; text-decoration:none;
-            border-radius:50px; transition:var(--transition); font-size:15px; font-weight:600; backdrop-filter:blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-size: 15px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
         }
-        .back-btn:hover { background:rgba(255,107,107,0.15); border-color:rgba(255,107,107,0.4); transform:translateX(-5px); }
-        .back-btn:hover i { transform:translateX(-3px); }
-        .back-btn i { transition:transform 0.3s ease; }
 
-        h1 {
-            text-align:center; margin-bottom:15px; font-size:36px; font-weight:700;
-            background:linear-gradient(135deg,#ffffff 0%,#ff6b6b 100%);
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-            display:flex; align-items:center; justify-content:center; gap:15px; flex-wrap:wrap;
+        .back-btn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
         }
-        h1 i { color:var(--accent-color); -webkit-text-fill-color:initial; }
+
+        .back-btn:hover {
+            background: rgba(255, 107, 107, 0.15);
+            border-color: rgba(255, 107, 107, 0.4);
+            transform: translateX(-5px);
+            box-shadow: 0 0 20px rgba(255,107,107,0.2);
+        }
+
+        .back-btn:hover i {
+            transform: translateX(-3px);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 { 
+            text-align: center; 
+            margin-bottom: 15px; 
+            font-size: 36px; 
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255,107,107,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        h1 i { 
+            color: var(--accent-color);
+            -webkit-text-fill-color: initial;
+            background: none;
+            text-shadow: 0 0 20px rgba(255,107,107,0.5);
+        }
 
         .page-subtitle {
-            font-size:16px; color:var(--text-secondary); margin-bottom:30px; text-align:center;
-            max-width:600px; margin-left:auto; margin-right:auto;
-            padding:10px 30px; background:rgba(255,107,107,0.1); border-radius:50px;
-            border:1px solid rgba(255,107,107,0.2);
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px 30px;
+            background: rgba(255,107,107,0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,107,107,0.2);
         }
 
-        /* ── CONTROLES ── */
-        .controls {
-            display:flex; flex-direction:column; gap:20px; margin-bottom:50px;
-            background:rgba(26,33,57,0.6); backdrop-filter:blur(10px);
-            padding:25px; border-radius:var(--border-radius); border:1px solid rgba(255,255,255,0.05);
+        /* Controles mejorados */
+        .controls { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            margin-bottom: 50px; 
+            background: rgba(26, 33, 57, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: var(--shadow-sm);
         }
+        
         .search-box input {
-            width:100%; padding:15px 20px; background:rgba(255,255,255,0.05);
-            border:1px solid rgba(255,255,255,0.1); border-radius:50px;
-            color:white; font-family:inherit; font-size:15px; transition:var(--transition);
+            width: 100%; 
+            padding: 15px 20px; 
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 50px; 
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            transition: var(--transition);
         }
-        .search-box input:focus { outline:none; border-color:var(--accent-color); background:rgba(255,107,107,0.05); box-shadow:0 0 20px rgba(255,107,107,0.2); }
-        .search-box input::placeholder { color:var(--text-secondary); }
-        .filters { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
-        .filter-btn {
-            padding:10px 22px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
-            color:white; border-radius:50px; cursor:pointer; transition:var(--transition);
-            font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px;
-        }
-        .filter-btn i { color:var(--accent-color); }
-        .filter-btn.active { background:var(--accent-color); border-color:var(--accent-color); box-shadow:0 0 20px rgba(255,107,107,0.4); }
-        .filter-btn.active i { color:white; }
-        .filter-btn:hover:not(.active) { background:rgba(255,107,107,0.15); border-color:rgba(255,107,107,0.4); transform:translateY(-2px); }
-        .results-count { text-align:center; font-size:14px; color:var(--text-secondary); }
-        .results-count i { color:var(--accent-color); margin-right:5px; }
 
-        /* ── GRID ── */
-        .videos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:30px; }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255,107,107,0.05);
+            box-shadow: 0 0 20px rgba(255,107,107,0.2);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .filters { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 12px; 
+            justify-content: center; 
+        }
+        
+        .filter-btn {
+            padding: 10px 22px; 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            transition: var(--transition); 
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn i {
+            color: var(--accent-color);
+            font-size: 14px;
+        }
+        
+        .filter-btn.active { 
+            background: var(--accent-color); 
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(255,107,107,0.4);
+        }
+
+        .filter-btn.active i {
+            color: white;
+        }
+
+        .filter-btn:hover:not(.active) {
+            background: rgba(255,107,107,0.15);
+            border-color: rgba(255,107,107,0.4);
+            transform: translateY(-2px);
+        }
+
+        /* GRID mejorado */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
         .video-card {
-            background:rgba(26,33,57,0.8); backdrop-filter:blur(10px);
-            border-radius:var(--border-radius); overflow:hidden;
-            border:1px solid rgba(255,255,255,0.05); transition:var(--transition);
-            cursor:pointer; position:relative;
-            animation:fadeInUp 0.5s ease forwards; opacity:0;
+            background: rgba(26, 33, 57, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            position: relative;
         }
+
+        /* Efecto de brillo en hover */
         .video-card::before {
-            content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-            background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);
-            transition:left 0.6s ease; z-index:1;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
         }
-        .video-card:hover::before { left:100%; }
-        .video-card:hover { transform:translateY(-8px) scale(1.02); border-color:var(--accent-color); box-shadow:var(--shadow-lg); }
 
-        .thumb-wrapper { width:100%; height:180px; overflow:hidden; position:relative; }
-        .video-thumbnail { width:100%; height:100%; background-size:cover; background-position:center; transition:transform 0.4s ease; }
-        .video-card:hover .video-thumbnail { transform:scale(1.08); }
-        .play-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; transition:var(--transition); }
-        .play-overlay i { font-size:50px; color:white; opacity:0.8; text-shadow:0 0 20px rgba(0,0,0,0.8); transition:var(--transition); }
-        .video-card:hover .play-overlay { background:rgba(0,0,0,0.15); }
-        .video-card:hover .play-overlay i { opacity:1; transform:scale(1.2); color:var(--accent-color); }
+        .video-card:hover::before {
+            left: 100%;
+        }
 
-        .video-info { padding:20px; position:relative; z-index:2; }
-        .video-category { color:var(--accent-color); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
-        .video-title { font-weight:700; font-size:16px; line-height:1.4; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; transition:color 0.3s ease; min-height:44px; }
-        .video-card:hover .video-title { color:var(--accent-color); }
+        .video-card:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            border-color: var(--accent-color);
+            box-shadow: var(--shadow-lg);
+            background: rgba(26, 33, 57, 0.95);
+        }
 
-        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-        .video-card:nth-child(1){animation-delay:.05s} .video-card:nth-child(2){animation-delay:.10s}
-        .video-card:nth-child(3){animation-delay:.15s} .video-card:nth-child(4){animation-delay:.20s}
-        .video-card:nth-child(5){animation-delay:.25s} .video-card:nth-child(6){animation-delay:.30s}
-        .video-card:nth-child(7){animation-delay:.35s} .video-card:nth-child(8){animation-delay:.40s}
-        .video-card:nth-child(9){animation-delay:.45s} .video-card:nth-child(10){animation-delay:.50s}
-        .video-card:nth-child(11){animation-delay:.55s} .video-card:nth-child(12){animation-delay:.60s}
-        .video-card:nth-child(13){animation-delay:.65s} .video-card:nth-child(14){animation-delay:.70s}
-        .video-card:nth-child(15){animation-delay:.75s} .video-card:nth-child(16){animation-delay:.80s}
-        .video-card:nth-child(17){animation-delay:.85s} .video-card:nth-child(18){animation-delay:.90s}
-        .video-card:nth-child(19){animation-delay:.95s}
+        .video-thumbnail {
+            width: 100%; 
+            height: 180px;
+            background-size: cover; 
+            background-position: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
 
-        /* ══════════════════════════════
-           MODAL — diseño vertical compacto
-           Reproductor arriba (dominante),
-           texto abajo con scroll.
-        ══════════════════════════════ */
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .play-overlay {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .play-overlay i { 
+            font-size: 50px; 
+            color: white; 
+            opacity: 0.8;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            transition: var(--transition);
+        }
+
+        .video-card:hover .play-overlay i {
+            opacity: 1;
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+
+        .video-info { 
+            padding: 20px; 
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-category { 
+            color: var(--accent-color); 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-category i {
+            font-size: 12px;
+        }
+
+        .video-title { 
+            font-weight: 700; 
+            font-size: 16px; 
+            line-height: 1.4; 
+            height: 44px; 
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .video-card:hover .video-title {
+            color: var(--accent-color);
+        }
+
+        /* MODAL MEJORADO CON REPRODUCTOR CONFIGURADO */
         .modal {
-            display:none; position:fixed; inset:0;
-            background:rgba(0,0,0,0.92); backdrop-filter:blur(20px);
-            z-index:2000; align-items:center; justify-content:center; padding:20px;
+            display: none;
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        .modal.active { display:flex; }
+        
+        .modal.active { 
+            display: flex; 
+        }
 
         .modal-content {
-            background:var(--card-gradient);
-            width:100%;
-            max-width:720px;          /* ← reproductor dominante pero no gigante */
-            max-height:90vh;
-            border-radius:var(--border-radius);
-            position:relative;
-            overflow:hidden;
-            display:flex;
-            flex-direction:column;
-            animation:popIn 0.35s cubic-bezier(0.175,0.885,0.32,1.275);
-            border:1px solid rgba(255,107,107,0.3);
-            box-shadow:0 30px 80px rgba(0,0,0,0.8);
+            background: var(--card-gradient);
+            width: 100%;
+            max-width: 1300px;
+            max-height: 90vh;
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,107,107,0.3);
+            box-shadow: var(--shadow-lg);
         }
+
         @keyframes popIn {
-            from { transform:scale(0.88) translateY(24px); opacity:0; }
-            to   { transform:scale(1)   translateY(0);     opacity:1; }
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        /* Botón cerrar */
-        .close-btn {
-            position:absolute; top:10px; right:12px;
-            width:34px; height:34px;
-            background:rgba(0,0,0,0.65); border:1.5px solid rgba(255,255,255,0.2);
-            border-radius:50%; color:white; font-size:16px; cursor:pointer;
-            display:flex; align-items:center; justify-content:center;
-            z-index:100; transition:var(--transition);
-        }
-        .close-btn:hover { transform:rotate(90deg) scale(1.1); color:var(--accent-color); border-color:var(--accent-color); background:rgba(255,107,107,0.2); }
-
-        /* ══ LAZY PLAYER ══
-           Mostramos miniatura + botón Play.
-           Al hacer clic, insertamos el iframe → autoplay garantizado
-           porque viene de un gesto real del usuario.             */
-        .yt-player-wrap {
-            position:relative; width:100%;
-            aspect-ratio:16/9;          /* mantiene proporción siempre */
-            background:#000; cursor:pointer; overflow:hidden; flex-shrink:0;
-        }
-        /* Fallback para Safari < 15 */
-        @supports not (aspect-ratio:16/9) {
-            .yt-player-wrap { padding-top:56.25%; }
-            .yt-player-wrap > * { position:absolute; top:0; left:0; width:100%; height:100%; }
+        .modal-body-wrapper {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            overflow-y: auto;
+            max-height: 90vh;
         }
 
-        .yt-thumb {
-            position:absolute; inset:0;
-            background-size:cover; background-position:center;
-            transition:transform 0.4s ease, filter 0.3s ease;
+        .video-container { 
+            background: #000; 
+            width: 100%; 
+            aspect-ratio: 16/9;
+            position: relative;
         }
-        .yt-player-wrap:hover .yt-thumb { transform:scale(1.04); filter:brightness(0.72); }
-
-        .yt-thumb-overlay {
-            position:absolute; inset:0;
-            background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.1) 55%,transparent 100%);
+        
+        .video-container iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
-
-        /* Botón play central */
-        .yt-play-btn {
-            position:absolute; top:50%; left:50%;
-            transform:translate(-50%,-50%);
-            width:68px; height:68px;
-            background:rgba(220,0,0,0.92);
-            border-radius:50%; display:flex; align-items:center; justify-content:center;
-            transition:transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-            z-index:3;
-        }
-        .yt-play-btn svg { width:26px; height:26px; fill:white; margin-left:4px; }
-        .yt-player-wrap:hover .yt-play-btn {
-            transform:translate(-50%,-50%) scale(1.14);
-            background:#ff0000;
-            box-shadow:0 0 0 16px rgba(255,0,0,0.14);
+        
+        .tutorial-text { 
+            padding: 30px; 
+            overflow-y: auto; 
+            background: rgba(22, 27, 41, 0.98);
+            backdrop-filter: blur(5px);
         }
 
-        /* Barra inferior con título */
-        .yt-title-bar {
-            position:absolute; bottom:0; left:0; right:0;
-            padding:12px 14px 10px;
-            font-size:12px; font-weight:700; color:white;
-            text-shadow:0 1px 4px rgba(0,0,0,0.9);
-            display:flex; align-items:center; gap:7px; z-index:3;
-        }
-        .yt-title-bar i { color:#ff4444; font-size:14px; flex-shrink:0; }
-
-        /* Iframe (insertado al hacer clic) */
-        .yt-player-wrap iframe {
-            position:absolute; inset:0; width:100%; height:100%; border:0;
+        .tutorial-text h2 { 
+            font-size: 22px; 
+            color: var(--accent-color); 
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
-        /* ── Panel de texto ── */
-        .tutorial-panel {
-            padding:22px 26px; overflow-y:auto;
-            background:rgba(16,21,34,0.98); flex:1;
-            max-height:240px;      /* limita altura del texto; scroll si hace falta */
+        .tutorial-text p { 
+            font-size: 15px; 
+            line-height: 1.7; 
+            color: var(--text-secondary);
+            margin-bottom: 20px;
         }
-        .tutorial-panel h2 { font-size:16px; color:var(--accent-color); margin-bottom:10px; font-weight:700; line-height:1.35; }
-        .tutorial-panel p  { font-size:13px; line-height:1.7; color:var(--text-secondary); margin-bottom:14px; }
 
         .steps-list {
-            background:rgba(255,107,107,0.07); border-left:3px solid var(--accent-color);
-            padding:14px 16px; border-radius:0 8px 8px 0; margin-bottom:14px;
-        }
-        .steps-list h3 { font-size:12px; color:white; margin-bottom:10px; display:flex; align-items:center; gap:6px; text-transform:uppercase; letter-spacing:0.5px; }
-        .steps-list ul { list-style:none; }
-        .steps-list li { margin-bottom:7px; font-size:12px; color:var(--text-secondary); display:flex; align-items:baseline; gap:8px; }
-        .steps-list li i { color:var(--accent-color); font-size:10px; flex-shrink:0; }
-
-        .yt-link-btn {
-            display:inline-flex; align-items:center; gap:8px;
-            padding:10px 18px; background:rgba(255,0,0,0.12);
-            border:1px solid rgba(255,0,0,0.35); color:white;
-            text-decoration:none; border-radius:50px;
-            font-size:12px; font-weight:700; transition:var(--transition);
-        }
-        .yt-link-btn i { color:#ff4444; }
-        .yt-link-btn:hover { background:rgba(255,0,0,0.25); transform:translateY(-2px); }
-
-        /* ── FOOTER ── */
-        footer { background:var(--header-bg); padding:40px 20px 30px; text-align:center; margin-top:60px; border-top:2px solid rgba(255,107,107,0.2); z-index:10; position:relative; }
-        .social-links { display:flex; justify-content:center; gap:25px; margin-bottom:20px; }
-        .social-link { display:inline-flex; align-items:center; justify-content:center; width:55px; height:55px; background:rgba(255,255,255,0.05); border:2px solid rgba(255,255,255,0.1); border-radius:50%; text-decoration:none; transition:var(--transition); position:relative; overflow:hidden; }
-        .social-link::before { content:''; position:absolute; inset:0; background:radial-gradient(circle,rgba(255,255,255,0.25) 0%,transparent 100%); opacity:0; transition:opacity 0.3s ease; }
-        .social-link:hover { transform:translateY(-8px) scale(1.1); }
-        .social-link:hover::before { opacity:1; }
-        .social-link img { width:28px; height:28px; object-fit:contain; filter:brightness(0) invert(1); transition:var(--transition); position:relative; z-index:2; }
-        .social-link:hover img { transform:scale(1.1); }
-        .discord:hover { background:rgba(88,101,242,0.2); border-color:#5865F2; }
-        .youtube:hover { background:rgba(255,0,0,0.2);   border-color:#FF0000; }
-        .twitter:hover { background:rgba(29,155,240,0.2); border-color:#1DA1F2; }
-        .footer-text { font-size:14px; color:var(--text-secondary); margin-top:20px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); }
-
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width:10px; }
-        ::-webkit-scrollbar-track { background:#0b0f1a; }
-        ::-webkit-scrollbar-thumb { background:linear-gradient(180deg,#ff6b6b,#ff8e8e); border-radius:5px; border:2px solid #0b0f1a; }
-
-        /* ── Responsive ── */
-        @media(max-width:768px){
-            header{font-size:28px;padding:25px 20px}
-            h1{font-size:26px}
-            .videos-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
-            .modal-content{max-width:100%}
-            .yt-play-btn{width:58px;height:58px}
-            .yt-play-btn svg{width:22px;height:22px}
-            .tutorial-panel{max-height:200px}
-        }
-        @media(max-width:480px){
-            header{font-size:22px;padding:18px 12px}
-            h1{font-size:22px;flex-direction:column}
-            .videos-grid{grid-template-columns:1fr}
-            .filter-btn{padding:7px 14px;font-size:12px}
-            .tutorial-panel{padding:16px}
-            .tutorial-panel h2{font-size:14px}
+            background: rgba(255,107,107,0.08);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 20px;
         }
 
-        /* Focus */
-        .filter-btn:focus-visible,.video-card:focus-visible,.back-btn:focus-visible,.social-link:focus-visible{outline:3px solid var(--accent-color);outline-offset:3px}
+        .steps-list h3 {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .steps-list ul {
+            list-style: none;
+        }
+
+        .steps-list li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .steps-list li i {
+            color: var(--accent-color);
+            font-size: 12px;
+        }
+
+        .close-btn {
+            position: absolute; 
+            top: 15px; 
+            right: 20px;
+            font-size: 40px; 
+            color: white; 
+            cursor: pointer; 
+            z-index: 100;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.2);
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background: rgba(255,107,107,0.2);
+        }
+
+        /* Footer mejorado */
+        footer {
+            background: var(--header-bg);
+            padding: 40px 20px 30px;
+            text-align: center;
+            position: relative;
+            margin-top: 60px;
+            border-top: 2px solid rgba(255,107,107,0.2);
+            z-index: 10;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.1);
+            border-color: var(--accent-color);
+            background: rgba(255,107,107,0.15);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link:hover img {
+            transform: scale(1.1);
+        }
+
+        .discord:hover {
+            background: rgba(88, 101, 242, 0.2);
+            border-color: #5865F2;
+        }
+
+        .youtube:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #FF0000;
+        }
+
+        .twitter:hover {
+            background: rgba(29, 155, 240, 0.2);
+            border-color: #1DA1F2;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Animaciones de entrada para tarjetas */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .video-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .video-card:nth-child(1) { animation-delay: 0.05s; }
+        .video-card:nth-child(2) { animation-delay: 0.1s; }
+        .video-card:nth-child(3) { animation-delay: 0.15s; }
+        .video-card:nth-child(4) { animation-delay: 0.2s; }
+        .video-card:nth-child(5) { animation-delay: 0.25s; }
+        .video-card:nth-child(6) { animation-delay: 0.3s; }
+        .video-card:nth-child(7) { animation-delay: 0.35s; }
+        .video-card:nth-child(8) { animation-delay: 0.4s; }
+        .video-card:nth-child(9) { animation-delay: 0.45s; }
+        .video-card:nth-child(10) { animation-delay: 0.5s; }
+        .video-card:nth-child(11) { animation-delay: 0.55s; }
+        .video-card:nth-child(12) { animation-delay: 0.6s; }
+        .video-card:nth-child(13) { animation-delay: 0.65s; }
+        .video-card:nth-child(14) { animation-delay: 0.7s; }
+        .video-card:nth-child(15) { animation-delay: 0.75s; }
+        .video-card:nth-child(16) { animation-delay: 0.8s; }
+        .video-card:nth-child(17) { animation-delay: 0.85s; }
+        .video-card:nth-child(18) { animation-delay: 0.9s; }
+        .video-card:nth-child(19) { animation-delay: 0.95s; }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-gradient);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff6b6b, #ff8e8e);
+            border-radius: 6px;
+            border: 3px solid var(--primary-gradient);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff8787, #ffa0a0);
+        }
+
+        /* Responsive mejorado */
+        @media (max-width: 1000px) {
+            .modal-body-wrapper { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .modal-content { 
+                max-height: 95vh; 
+            }
+
+            .tutorial-text {
+                max-height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 28px;
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .page-subtitle {
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+
+            .controls {
+                padding: 20px;
+            }
+
+            .filter-btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+
+            .videos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .video-thumbnail {
+                height: 160px;
+            }
+
+            .tutorial-text h2 {
+                font-size: 20px;
+            }
+
+            .close-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 35px;
+                top: 10px;
+                right: 15px;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-link img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 24px;
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+                flex-direction: column;
+            }
+
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .filters {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-title {
+                font-size: 15px;
+                height: auto;
+                min-height: 42px;
+            }
+
+            .tutorial-text {
+                padding: 20px;
+            }
+
+            .tutorial-text h2 {
+                font-size: 18px;
+            }
+
+            .tutorial-text p {
+                font-size: 14px;
+            }
+
+            .close-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+
+            .social-link img {
+                width: 22px;
+                height: 22px;
+            }
+
+            .footer-text {
+                font-size: 12px;
+            }
+        }
+
+        /* Mejora de accesibilidad */
+        .filter-btn:focus-visible,
+        .video-card:focus-visible,
+        .back-btn:focus-visible,
+        .social-link:focus-visible {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+
+        /* Contador de resultados */
+        .results-count {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        .results-count i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7207868307854402" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7207868307854402"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
-<header onclick="location.href='index.html'">
-    <i class="fas fa-star"></i> Aldex64 <i class="fas fa-star"></i>
-</header>
-
-<div class="container">
-    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
-
-    <div class="page-header">
-        <h1><i class="fas fa-bolt"></i> Tutoriales SM64COOPDX</h1>
-        <p class="page-subtitle"><i class="fas fa-info-circle"></i> Aprende a personalizar, instalar mods y optimizar tu juego</p>
-    </div>
-
-    <div class="controls">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Buscar tutoriales...">
-        </div>
-        <div class="filters">
-            <button class="filter-btn active" data-filter="todos"><i class="fas fa-globe"></i> Todos</button>
-            <button class="filter-btn" data-filter="Personalizacion"><i class="fas fa-paint-brush"></i> Personalización</button>
-            <button class="filter-btn" data-filter="Herramientas"><i class="fas fa-tools"></i> Herramientas</button>
-            <button class="filter-btn" data-filter="Mods"><i class="fas fa-puzzle-piece"></i> Mods</button>
-        </div>
-        <div class="results-count"><i class="fas fa-video"></i> <span id="countNumber">19</span> tutoriales disponibles</div>
-    </div>
-
-    <div class="videos-grid" id="videosGrid"></div>
-</div>
-
-<!-- MODAL -->
-<div id="videoModal" class="modal" role="dialog" aria-modal="true">
-    <div class="modal-content" id="modalContent">
-        <span class="close-btn" id="closeBtn" title="Cerrar (ESC)" aria-label="Cerrar">✕</span>
-
-        <!-- LAZY PLAYER: miniatura → clic → iframe real -->
-        <div class="yt-player-wrap" id="ytPlayerWrap">
-            <div class="yt-thumb" id="ytThumb"></div>
-            <div class="yt-thumb-overlay" id="ytOverlay"></div>
-            <div class="yt-play-btn" id="ytPlayBtn">
-                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="yt-title-bar" id="ytTitleBar">
-                <i class="fab fa-youtube"></i>
-                <span id="ytTitleText"></span>
-            </div>
-        </div>
-
-        <!-- TEXTO DEL TUTORIAL -->
-        <div class="tutorial-panel" id="tutorialPanel"></div>
-    </div>
-</div>
-
-<footer>
-    <div class="social-links">
-        <a href="https://discord.com/invite/NESqtHkvPw" target="_blank" rel="noopener noreferrer" class="social-link discord" aria-label="Discord">
-            <img src="https://i.imgur.com/1pDObUV.png" alt="Discord" loading="lazy">
+    <header onclick="location.href='index.html'">
+        <i class="fas fa-star"></i> 
+        Aldex64 
+        <i class="fas fa-star"></i>
+    </header>
+    
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Volver al inicio
         </a>
-        <a href="https://youtube.com/@aldex64" target="_blank" rel="noopener noreferrer" class="social-link youtube" aria-label="YouTube">
-            <img src="https://i.imgur.com/MdOlunX.png" alt="YouTube" loading="lazy">
-        </a>
-        <a href="https://x.com/Aldex64?s=20" target="_blank" rel="noopener noreferrer" class="social-link twitter" aria-label="X/Twitter">
-            <img src="https://i.imgur.com/CIfFbY3.png" alt="X" loading="lazy">
-        </a>
-    </div>
-    <div class="footer-text">
-        <p>&copy; 2025 Aldex64. Todos los derechos reservados.</p>
-        <p style="margin-top:10px;font-size:12px;opacity:0.8;">Tu comunidad gaming de confianza</p>
-    </div>
-</footer>
-
-<script>
-const videos = [
-    {id:"1c9-sxr0xLM",title:"Personaliza tu SM64COOPDX pt2",   cat:"Personalizacion",desc:"Sigue aprendiendo a customizar tu juego con texturas nuevas. En este tutorial te mostramos cómo instalar packs de texturas personalizadas y cambiar la apariencia de Mario."},
-    {id:"2JeqBhXgNxs",title:"PACK DE MEJORAS SM64COOPDX",       cat:"Personalizacion",desc:"Instala texturas HD y corrección de bugs visuales con este pack optimizado para Coop. Mejora drásticamente los gráficos sin sacrificar rendimiento."},
-    {id:"9ZPdTyzrefk",title:"Fuente HUD para Miniaturas",        cat:"Herramientas",   desc:"Usa la fuente HUD para hacer miniaturas, imágenes y más contenido para tus videos. Descarga e instala la fuente oficial del HUD de SM64."},
-    {id:"B6dmc68kxkA",title:"Cómo ser YouTuber de SM64",         cat:"Herramientas",   desc:"Consejos de edición y grabación específicos para la comunidad de Super Mario 64. Aprende a destacar en la plataforma."},
-    {id:"C3b6vl2Vjvs",title:"Optimiza tu SM64COOPDX",            cat:"Herramientas",   desc:"Configuración recomendada para eliminar el lag y mejorar los FPS en PC de bajos recursos. Incluye ajustes gráficos y de rendimiento."},
-    {id:"CjWdaC0ADus",title:"Bits de tu móvil (32/64)",          cat:"Herramientas",   desc:"Aprende a identificar la arquitectura de tu Android para instalar la APK correcta. Tutorial completo con ejemplos visuales."},
-    {id:"Ehc2F_FsOoQ",title:"Los Mejores 5 Mods SM64",           cat:"Mods",           desc:"Top de mods de gameplay que añaden mecánicas de Odyssey, Galaxy y otros juegos modernos. Incluye links de descarga."},
-    {id:"OmyctuHPb54",title:"Nombre con Color en CoopDX",        cat:"Personalizacion",desc:"Usa códigos de color en tu perfil para resaltar entre los demás jugadores en el lobby. Guía paso a paso."},
-    {id:"XDG42y0JySA",title:"Jugar SM64EXOMM en Android",        cat:"Herramientas",   desc:"Tutorial de instalación del motor EX con el mod de movimientos de Odyssey. Optimizado para dispositivos móviles."},
-    {id:"aZGAcEfTYMQ",title:"Crear Miniaturas",                  cat:"Herramientas",   desc:"Trucos de diseño gráfico para que tus videos reciban más clics en YouTube. Tips profesionales con ejemplos prácticos."},
-    {id:"dbc1ZdB7EU8",title:"Crea tu propio SkinPack",           cat:"Personalizacion",desc:"Aprende a crear packs de personajes o texturas personalizadas para compartir con la comunidad."},
-    {id:"hiI4OiUh_-4",title:"Crea tu propio MOD (LUA)",          cat:"Personalizacion",desc:"Introducción básica al lenguaje LUA para modificar comportamientos de Mario. Crea tus primeras líneas de código."},
-    {id:"htew6v93TmQ",title:"Botones Personalizados Android",    cat:"Personalizacion",desc:"Cambia la apariencia de los controles táctiles en la pantalla de tu coop. Diseños exclusivos."},
-    {id:"jP-Ft8Nloh0",title:"Estrella en tu Nombre",             cat:"Personalizacion",desc:"Personaliza tu nombre añadiendo una estrella ⭐ a tu perfil. Solo cópiala y pégala."},
-    {id:"lCfxAGxlBXk",title:"Personaliza tu SM64COOPDX pt1",    cat:"Personalizacion",desc:"Conceptos básicos de personalización interna y menús de opciones. Primeros pasos para modificar el juego."},
-    {id:"oeA5w4UxgRE",title:"Los 10 Mejores Mods Coop",          cat:"Mods",           desc:"Colección de mods multijugador para divertirse al máximo con amigos. Mods de personajes, niveles y más."},
-    {id:"sKpNHLjajrc",title:"Crear tu mod (Método Antiguo)",     cat:"Mods",           desc:"Tutorial clásico que sigue siendo funcional para entender la estructura de archivos de los mods."},
-    {id:"u7V-UEWnOPw",title:"Arreglar Conexión CoopNet",         cat:"Herramientas",   desc:"Solución a los problemas de red más comunes al intentar jugar online. Configuración de puertos y firewall."},
-    {id:"u8JA2afCTDc",title:"Descarga SM64COOPDX (1.4.0)",       cat:"Herramientas",   desc:"Juega SM64COOPDX en tu dispositivo. Guía completa de instalación para PC, Android y más."}
-];
-
-let currentFilter = "todos";
-let currentSearch  = "";
-let currentVideo   = null;
-
-const grid       = document.getElementById("videosGrid");
-const modal      = document.getElementById("videoModal");
-const countEl    = document.getElementById("countNumber");
-const playerWrap = document.getElementById("ytPlayerWrap");
-const thumb      = document.getElementById("ytThumb");
-const overlay    = document.getElementById("ytOverlay");
-const playBtn    = document.getElementById("ytPlayBtn");
-const titleBar   = document.getElementById("ytTitleBar");
-const titleText  = document.getElementById("ytTitleText");
-const panel      = document.getElementById("tutorialPanel");
-
-/* ── Render ── */
-function render() {
-    const filtered = videos.filter(v =>
-        (currentFilter === "todos" || v.cat === currentFilter) &&
-        v.title.toLowerCase().includes(currentSearch)
-    );
-    grid.innerHTML = "";
-    if (!filtered.length) {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;background:rgba(26,33,57,0.6);border-radius:var(--border-radius);">
-            <i class="fas fa-search" style="font-size:48px;color:var(--accent-color);opacity:0.5;display:block;margin-bottom:20px;"></i>
-            <h3 style="font-size:18px;margin-bottom:8px;">No se encontraron tutoriales</h3>
-            <p style="color:var(--text-secondary);">Prueba con otros términos o categorías</p></div>`;
-        countEl.textContent = 0;
-        return;
-    }
-    filtered.forEach(v => {
-        const card = document.createElement("div");
-        card.className = "video-card";
-        card.tabIndex = 0;
-        card.setAttribute("role","button");
-        card.setAttribute("aria-label",`Ver tutorial: ${v.title}`);
-        card.innerHTML = `
-            <div class="thumb-wrapper">
-                <div class="video-thumbnail" style="background-image:url('https://i.ytimg.com/vi/${v.id}/hqdefault.jpg')"></div>
-                <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
-            </div>
-            <div class="video-info">
-                <div class="video-category"><i class="fas fa-tag"></i> ${v.cat}</div>
-                <div class="video-title">${v.title}</div>
-            </div>`;
-        card.addEventListener("click",()=>openVideo(v));
-        card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")openVideo(v);});
-        grid.appendChild(card);
-    });
-    countEl.textContent = filtered.length;
-}
-
-/* ── Abrir modal ── */
-function openVideo(v) {
-    currentVideo = v;
-    resetPlayer();
-
-    // Miniatura: intentar maxres, si falla usar hqdefault
-    thumb.style.backgroundImage = `url('https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg')`;
-    const probe = new Image();
-    probe.src = `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`;
-    probe.onerror = () => {
-        thumb.style.backgroundImage = `url('https://i.ytimg.com/vi/${v.id}/hqdefault.jpg')`;
-    };
-
-    titleText.textContent = v.title;
-
-    panel.innerHTML = `
-        <h2>${v.title}</h2>
-        <p>${v.desc}</p>
-        <div class="steps-list">
-            <h3><i class="fas fa-check-circle"></i> Pasos</h3>
-            <ul>
-                <li><i class="fas fa-mouse-pointer"></i> Haz clic en la miniatura para reproducir</li>
-                <li><i class="fas fa-link"></i> Revisa los enlaces en la descripción de YouTube</li>
-                <li><i class="fas fa-discord"></i> Únete al Discord si tienes dudas</li>
-                <li><i class="fas fa-star"></i> ¡Dale like y suscríbete!</li>
-            </ul>
+        
+        <div class="page-header">
+            <h1>
+                <i class="fas fa-bolt"></i>
+                Tutoriales SM64COOPDX
+            </h1>
+            <p class="page-subtitle">
+                <i class="fas fa-info-circle"></i>
+                Aprende a personalizar, instalar mods y optimizar tu juego
+            </p>
         </div>
-        <a class="yt-link-btn" href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-youtube"></i> Ver en YouTube
-        </a>`;
 
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-}
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar tutoriales...">
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="todos">
+                    <i class="fas fa-globe"></i> Todos
+                </button>
+                <button class="filter-btn" data-filter="Personalizacion">
+                    <i class="fas fa-paint-brush"></i> Personalización
+                </button>
+                <button class="filter-btn" data-filter="Herramientas">
+                    <i class="fas fa-tools"></i> Herramientas
+                </button>
+                <button class="filter-btn" data-filter="Mods">
+                    <i class="fas fa-puzzle-piece"></i> Mods
+                </button>
+            </div>
+            <div class="results-count" id="resultsCount">
+                <i class="fas fa-video"></i> <span id="countNumber">19</span> tutoriales disponibles
+            </div>
+        </div>
 
-/* ── Cargar iframe al hacer clic (garantiza autoplay real) ── */
-function loadIframe() {
-    if (!currentVideo) return;
-    // Ocultar la miniatura
-    thumb.style.display   = "none";
-    overlay.style.display = "none";
-    playBtn.style.display = "none";
-    titleBar.style.display= "none";
-    // Insertar iframe — el autoplay funciona porque viene de un click real del usuario
-    const f = document.createElement("iframe");
-    f.src = `https://www.youtube.com/embed/${currentVideo.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1&color=red&hl=es`;
-    f.setAttribute("allowfullscreen","true");
-    f.setAttribute("allow","autoplay; fullscreen; encrypted-media; picture-in-picture");
-    f.setAttribute("title", currentVideo.title);
-    playerWrap.appendChild(f);
-}
+        <div class="videos-grid" id="videosGrid"></div>
+    </div>
 
-/* ── Resetear player a estado miniatura ── */
-function resetPlayer() {
-    const f = playerWrap.querySelector("iframe");
-    if (f) f.remove();
-    thumb.style.display    = "";
-    overlay.style.display  = "";
-    playBtn.style.display  = "";
-    titleBar.style.display = "";
-}
+    <!-- MODAL CON REPRODUCTOR DE YOUTUBE CONFIGURADO -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeVideo()">&times;</span>
+            <div class="modal-body-wrapper">
+                <div class="video-container" id="player"></div>
+                <div class="tutorial-text" id="tutorialText"></div>
+            </div>
+        </div>
+    </div>
 
-/* ── Cerrar ── */
-function closeVideo() {
-    modal.classList.remove("active");
-    resetPlayer();
-    panel.innerHTML = "";
-    currentVideo = null;
-    document.body.style.overflow = "";
-}
+    <footer>
+        <div class="social-links">
+            <a href="https://discord.com/invite/NESqtHkvPw" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Únete a Discord" aria-label="Discord">
+                <img src="https://i.imgur.com/1pDObUV.png" alt="Discord" loading="lazy">
+            </a>
+            <a href="https://youtube.com/@aldex64" target="_blank" rel="noopener noreferrer" class="social-link youtube" title="Visita YouTube" aria-label="YouTube">
+                <img src="https://i.imgur.com/MdOlunX.png" alt="YouTube" loading="lazy">
+            </a>
+            <a href="https://x.com/Aldex64?s=20" target="_blank" rel="noopener noreferrer" class="social-link twitter" title="Síguenos en X" aria-label="X/Twitter">
+                <img src="https://i.imgur.com/CIfFbY3.png" alt="X" loading="lazy">
+            </a>
+        </div>
+        <div class="footer-text">
+            <p>&copy; 2025 Aldex64. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">Tu comunidad gaming de confianza</p>
+        </div>
+    </footer>
 
-/* ── Eventos ── */
-[playBtn, thumb, overlay].forEach(el => el.addEventListener("click", loadIframe));
-document.getElementById("closeBtn").addEventListener("click", closeVideo);
-document.addEventListener("keydown", e => { if(e.key==="Escape" && modal.classList.contains("active")) closeVideo(); });
-modal.addEventListener("click", e => { if(e.target===modal) closeVideo(); });
-document.getElementById("modalContent").addEventListener("click", e => e.stopPropagation());
-document.getElementById("searchInput").addEventListener("input", e => { currentSearch=e.target.value.toLowerCase(); render(); });
-document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-        document.querySelector(".filter-btn.active").classList.remove("active");
-        btn.classList.add("active");
-        currentFilter = btn.dataset.filter;
+    <script>
+        const videos = [
+            { id: "1c9-sxr0xLM", title: "Personaliza tu SM64COOPDX pt2", category: "Personalizacion", desc: "Sigue aprendiendo a customizar tu juego con texturas nuevas. En este tutorial te mostramos cómo instalar packs de texturas personalizadas y cambiar la apariencia de Mario." },
+            { id: "2JeqBhXgNxs", title: "PACK DE MEJORAS SM64COOPDX", category: "Personalizacion", desc: "Instala texturas HD y corrección de bugs visuales con este pack optimizado para Coop. Mejora drásticamente los gráficos sin sacrificar rendimiento." },
+            { id: "9ZPdTyzrefk", title: "Fuente HUD para Miniaturas", category: "Herramientas", desc: "Usa la fuente HUD para hacer miniaturas, imágenes y más contenido para tus videos. Descarga e instala la fuente oficial del HUD de SM64." },
+            { id: "B6dmc68kxkA", title: "Cómo ser YouTuber de SM64", category: "Herramientas", desc: "Consejos de edición y grabación específicos para la comunidad de Super Mario 64. Aprende a destacar en la plataforma." },
+            { id: "C3b6vl2Vjvs", title: "Optimiza tu SM64COOPDX", category: "Herramientas", desc: "Configuración recomendada para eliminar el lag y mejorar los FPS en PC de bajos recursos. Incluye ajustes gráficos y de rendimiento." },
+            { id: "CjWdaC0ADus", title: "Bits de tu móvil (32/64)", category: "Herramientas", desc: "Aprende a identificar la arquitectura de tu Android para instalar la APK correcta. Tutorial completo con ejemplos visuales." },
+            { id: "Ehc2F_FsOoQ", title: "Los Mejores 5 Mods SM64", category: "Mods", desc: "Top de mods de gameplay que añaden mecánicas de Odyssey, Galaxy y otros juegos modernos. Incluye links de descarga." },
+            { id: "OmyctuHPb54", title: "Nombre con Color en CoopDX", category: "Personalizacion", desc: "Usa códigos de color en tu perfil para resaltar entre los demás jugadores en el lobby. Guía paso a paso." },
+            { id: "XDG42y0JySA", title: "Jugar SM64EXOMM en Android", category: "Herramientas", desc: "Tutorial de instalación del motor EX con el mod de movimientos de Odyssey. Optimizado para dispositivos móviles." },
+            { id: "aZGAcEfTYMQ", title: "Crear Miniaturas", category: "Herramientas", desc: "Trucos de diseño gráfico para que tus videos reciban más clics en YouTube. Tips profesionales con ejemplos prácticos." },
+            { id: "dbc1ZdB7EU8", title: "Crea tu propio SkinPack", category: "Personalizacion", desc: "Aprende a crear packs de personajes o texturas personalizadas para compartir con la comunidad." },
+            { id: "hiI4OiUh_-4", title: "Crea tu propio MOD (LUA)", category: "Personalizacion", desc: "Introducción básica al lenguaje LUA para modificar comportamientos de Mario. Crea tus primeras líneas de código." },
+            { id: "htew6v93TmQ", title: "Botones Personalizados Android", category: "Personalizacion", desc: "Cambia la apariencia de los controles táctiles en la pantalla de tu coop. Diseños exclusivos." },
+            { id: "jP-Ft8Nloh0", title: "Estrella en tu Nombre", category: "Personalizacion", desc: "Personaliza tu nombre añadiendo una estrella a tu nombre, solo copia este símbolo: [  ] y pégalo en tu perfil." },
+            { id: "lCfxAGxlBXk", title: "Personaliza tu SM64COOPDX pt1", category: "Personalizacion", desc: "Conceptos básicos de personalización interna y menús de opciones. Primeros pasos para modificar el juego." },
+            { id: "oeA5w4UxgRE", title: "Los 10 Mejores Mods Coop", category: "Mods", desc: "Colección de mods multijugador para divertirse al máximo con amigos. Mods de personajes, niveles y más." },
+            { id: "sKpNHLjajrc", title: "Crear tu mod (Método Antiguo)", category: "Mods", desc: "Tutorial clásico que sigue siendo funcional para entender la estructura de archivos de los mods." },
+            { id: "u7V-UEWnOPw", title: "Arreglar Conexión CoopNet", category: "Herramientas", desc: "Solución a los problemas de red más comunes al intentar jugar online. Configuración de puertos y firewall." },
+            { id: "u8JA2afCTDc", title: "Descarga SM64COOPDX (1.4.0)", category: "Herramientas", desc: "Juega SM64COOPDX en tu dispositivo. Guía completa de instalación para PC, Android y más." }
+        ];
+
+        let currentFilter = "todos";
+        let currentSearch = "";
+        const grid = document.getElementById("videosGrid");
+        const modal = document.getElementById("videoModal");
+        const resultsCountSpan = document.getElementById("countNumber");
+
+        function updateResultsCount(count) {
+            resultsCountSpan.textContent = count;
+        }
+
+        function render() {
+            const filteredVideos = videos.filter(v => 
+                (currentFilter === "todos" || v.category === currentFilter) && 
+                v.title.toLowerCase().includes(currentSearch)
+            );
+            
+            grid.innerHTML = "";
+            
+            if (filteredVideos.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: rgba(26,33,57,0.6); border-radius: var(--border-radius);">
+                        <i class="fas fa-search" style="font-size: 50px; color: var(--accent-color); opacity: 0.5; margin-bottom: 20px;"></i>
+                        <h3 style="font-size: 20px; margin-bottom: 10px;">No se encontraron tutoriales</h3>
+                        <p style="color: var(--text-secondary);">Prueba con otros términos de búsqueda o categorías</p>
+                    </div>
+                `;
+            } else {
+                filteredVideos.forEach(v => {
+                    const card = document.createElement("div");
+                    card.className = "video-card";
+                    card.onclick = () => openVideo(v);
+                    card.innerHTML = `
+                        <div class="video-thumbnail" style="background-image:url('https://i.ytimg.com/vi/${v.id}/hqdefault.jpg')">
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-category">
+                                <i class="fas fa-tag"></i>
+                                ${v.category}
+                            </div>
+                            <div class="video-title">${v.title}</div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+            
+            updateResultsCount(filteredVideos.length);
+        }
+
+        // REPRODUCTOR DE YOUTUBE CONFIGURADO - VERSIÓN MEJORADA
+        function openVideo(v) {
+            // Limpiar reproductor anterior completamente
+            const playerContainer = document.getElementById("player");
+            playerContainer.innerHTML = '';
+            
+            // Crear iframe con TODOS los parámetros optimizados
+            const iframe = document.createElement('iframe');
+            
+            // CONFIGURACIÓN COMPLETA DEL REPRODUCTOR
+            const params = new URLSearchParams({
+                autoplay: '1',              // Reproducción automática
+                rel: '0',                   // No mostrar videos relacionados
+                modestbranding: '1',        // Sin logo de YouTube
+                controls: '1',              // Mostrar controles
+                showinfo: '0',             // Ocultar información del video
+                iv_load_policy: '3',       // Sin anuncios en video
+                color: 'red',              // Barra de progreso roja
+                disablekb: '0',            // Habilitar controles de teclado
+                fs: '1',                  // Permitir pantalla completa
+                playsinline: '1',          // Reproducción inline en móviles
+                enablejsapi: '1',          // Habilitar API de JavaScript
+                origin: window.location.origin, // Seguridad CSRF
+                widget_referrer: window.location.origin, // Referer para analytics
+                cc_load_policy: '0',       // No mostrar subtítulos automáticamente
+                hl: 'es',                 // Idioma español
+                autohide: '1'             // Auto-ocultar controles
+            });
+
+            iframe.src = `https://www.youtube.com/embed/${v.id}?${params.toString()}`;
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media; picture-in-picture');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('loading', 'lazy');
+            iframe.setAttribute('title', `${v.title} - Tutorial Aldex64`);
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            
+            playerContainer.appendChild(iframe);
+            
+            // Contenido del tutorial mejorado
+            document.getElementById("tutorialText").innerHTML = `
+                <h2>${v.title}</h2>
+                <p>${v.desc}</p>
+                <div class="steps-list">
+                    <h3><i class="fas fa-check-circle"></i> Pasos a seguir:</h3>
+                    <ul>
+                        <li><i class="fas fa-play"></i> Mira el video completo para ver el procedimiento</li>
+                        <li><i class="fas fa-link"></i> Revisa los enlaces en la descripción original de YouTube</li>
+                        <li><i class="fas fa-discord"></i> Únete al Discord de Aldex64 si tienes dudas</li>
+                        <li><i class="fas fa-star"></i> No olvides dejar tu like y suscribirte para más contenido</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 25px; padding: 15px; background: rgba(255,107,107,0.08); border-radius: 12px; border: 1px solid rgba(255,107,107,0.2);">
+                    <p style="display: flex; align-items: center; gap: 12px; margin: 0;">
+                        <i class="fas fa-info-circle" style="color: var(--accent-color); font-size: 18px;"></i>
+                        <span style="font-size: 13px; color: var(--text-secondary);">¿Problemas con el video? Presiona ESC para cerrar o haz clic fuera del modal. También puedes verlo directamente en YouTube.</span>
+                    </p>
+                </div>
+            `;
+            
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+            
+            // Actualizar URL (opcional, para analytics)
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, null, `#tutorial-${v.id}`);
+            }
+        }
+
+        // CERRAR VIDEO - LIMPIEZA COMPLETA
+        function closeVideo() {
+            modal.classList.remove("active");
+            
+            // IMPORTANTE: Eliminar completamente el iframe para detener la reproducción
+            const playerContainer = document.getElementById("player");
+            playerContainer.innerHTML = '';
+            
+            document.body.style.overflow = "auto";
+            
+            // Limpiar URL hash
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, null, ' ');
+            }
+        }
+
+        // Evento para cerrar con tecla ESC
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeVideo();
+            }
+        });
+
+        // Cerrar al hacer clic fuera del modal
+        window.onclick = e => { 
+            if (e.target == modal) closeVideo(); 
+        };
+
+        // Búsqueda en tiempo real
+        document.getElementById("searchInput").addEventListener("input", e => { 
+            currentSearch = e.target.value.toLowerCase(); 
+            render(); 
+        });
+        
+        // Filtros por categoría
+        document.querySelectorAll(".filter-btn").forEach(btn => btn.addEventListener("click", () => {
+            document.querySelector(".filter-btn.active").classList.remove("active");
+            btn.classList.add("active");
+            currentFilter = btn.dataset.filter;
+            render();
+        }));
+
+        // Prevenir que el modal se cierre al hacer clic dentro del contenido
+        document.querySelector('.modal-content')?.addEventListener('click', e => {
+            e.stopPropagation();
+        });
+
+        // Inicializar
         render();
-    });
-});
-
-render();
-</script>
+    </script>
 </body>
 </html>
