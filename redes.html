@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aldex64 | Redes Sociales</title>
+    <title>Aldex64 | Redes Sociales - Conéctate con la comunidad</title>
+    <meta name="description" content="Todas las redes sociales de Aldex64: YouTube, TikTok, Discord, Twitch, Kick, Telegram y Twitter. ¡Únete a la comunidad!">
     <link rel="shortcut icon" href="https://i.imgur.com/5V0Yo3v.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a2e0e6ad61.js" crossorigin="anonymous"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
-        @font-face {
-            font-family: Mario64;
-            src: url(assets/fonts/Mario64.ttf);
+        /* Variables CSS para consistencia con el sitio principal */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0b0f1a 0%, #1a1f2c 100%);
+            --card-gradient: linear-gradient(145deg, #1e2433, #141824);
+            --accent-color: #ff6b6b;
+            --accent-hover: #ff8787;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c1d1;
+            --header-bg: linear-gradient(90deg, #0c0f16 0%, #1a1f2a 100%);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
 
         * {
@@ -22,69 +34,205 @@
         }
 
         body {
-            background-color: #121727;
-            color: #ffffff;
-            font-family: Montserrat;
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efecto de fondo animado (igual que el index) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,107,107,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,107,107,0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         header {
-            background: linear-gradient(90deg, #111727 0%, #1a2139 100%);
+            background: var(--header-bg);
             padding: 30px 20px;
             text-align: center;
             font-size: 36px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+            letter-spacing: 4px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(255,107,107,0.3);
+            z-index: 10;
+        }
+
+        /* Efecto de brillo en header */
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shine 8s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
+            50% { transform: translateX(30%) translateY(30%) rotate(10deg); }
+            100% { transform: translateX(-30%) translateY(-30%) rotate(0deg); }
         }
 
         header:hover {
-            background: linear-gradient(90deg, #1a2139 0%, #222d45 100%);
+            background: linear-gradient(90deg, #1a1f2a 0%, #252b3a 100%);
+            letter-spacing: 6px;
+        }
+
+        header i {
+            color: var(--accent-color);
+            margin: 0 10px;
+            filter: drop-shadow(0 0 10px rgba(255,107,107,0.5));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .main-content {
             flex: 1;
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Botón Back mejorado */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0 30px 0;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-size: 15px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .back-btn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 107, 107, 0.15);
+            border-color: rgba(255, 107, 107, 0.4);
+            transform: translateX(-5px);
+            box-shadow: 0 0 20px rgba(255,107,107,0.2);
+        }
+
+        .back-btn:hover i {
+            transform: translateX(-3px);
         }
 
         h1 {
             text-align: center;
-            padding: 20px;
-            font-size: 1.8rem;
-            font-family: Montserrat;
+            padding: 20px 20px 40px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255,107,107,0.3);
+            letter-spacing: 2px;
         }
 
-        /* Caja principal (ENLACE COMPLETO) */
-        .social {
-            background-color: #1a2139;
-            border: 1px solid #232d4d;
-            border-radius: 10px;
-            padding: 10px;
+        /* Contenedor de redes sociales */
+        .socials-container {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Caja principal de red social - MEJORADA */
+        .social {
+            background: rgba(26, 33, 57, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius);
+            padding: 16px 20px;
+            display: flex;
+            gap: 20px;
             align-items: center;
-            width: 90%;
-            max-width: 500px;
-            margin: 20px auto;
-            transition: all 0.3s ease;
+            width: 100%;
+            transition: var(--transition);
             text-decoration: none;
             color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Hover */
+        /* Efecto de brillo en hover */
+        .social::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .social:hover::before {
+            left: 100%;
+        }
+
+        /* Hover principal */
         .social:hover {
-            transform: scale(1.1);
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255,107,107,0.3);
+            background: rgba(26, 33, 57, 0.95);
         }
 
         /* Imagen */
         .social img {
-            width: 50px;
-            height: 50px;
-            filter: invert(100%);
-            padding: 5px;
+            width: 55px;
+            height: 55px;
+            filter: brightness(0) invert(1);
+            padding: 8px;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+            object-fit: contain;
+        }
+
+        .social:hover img {
+            transform: scale(1.15) rotate(5deg);
         }
 
         /* Contenedor de texto */
@@ -92,166 +240,281 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
         }
 
         /* Texto dentro del link */
-        .social-redes span,
-        .social-redes p {
+        .social-redes span {
             margin: 0;
-            line-height: 1.2;
+            line-height: 1.3;
             color: #ffffff;
             text-decoration: none;
-        }
-
-        .social-redes span {
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
         }
 
         .social-redes p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Glow effects por red social */
-        .social.youtube:hover,
-        .social.youtube:active {
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 0, 0.2);
-            border-color: rgba(255, 0, 0, 0.6);
-        }
-
-        .social.tiktok:hover,
-        .social.tiktok:active {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .social.telegram:hover,
-        .social.telegram:active {
-            box-shadow: 0 0 20px rgba(0, 136, 204, 0.6), inset 0 0 20px rgba(0, 136, 204, 0.2);
-            border-color: rgba(0, 136, 204, 0.6);
-        }
-
-        .social.twitter:hover,
-        .social.twitter:active {
-            box-shadow: 0 0 20px rgba(29, 155, 240, 0.6), inset 0 0 20px rgba(29, 155, 240, 0.2);
-            border-color: rgba(29, 155, 240, 0.6);
-        }
-
-        .social.discord:hover,
-        .social.discord:active {
-            box-shadow: 0 0 20px rgba(88, 101, 242, 0.6), inset 0 0 20px rgba(88, 101, 242, 0.2);
-            border-color: rgba(88, 101, 242, 0.6);
-        }
-
-        .social.twitch:hover,
-        .social.twitch:active {
-            box-shadow: 0 0 20px rgba(145, 70, 255, 0.6), inset 0 0 20px rgba(145, 70, 255, 0.2);
-            border-color: rgba(145, 70, 255, 0.6);
-        }
-
-        .social.kick:hover,
-        .social.kick:active {
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6), inset 0 0 20px rgba(0, 255, 0, 0.2);
-            border-color: rgba(0, 255, 0, 0.6);
-        }
-
-        /* Botón Back */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 20px 0 30px 20px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
+            margin: 0;
+            line-height: 1.3;
+            color: var(--text-secondary);
             text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateX(-3px);
+        /* Efectos de glow específicos por plataforma - MEJORADOS */
+        .social.youtube:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4), inset 0 0 20px rgba(255, 0, 0, 0.1);
+            border-color: #FF0000;
         }
 
-        /* Footer */
+        .social.tiktok:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.2);
+            border-color: #ffffff;
+        }
+
+        .social.telegram:hover {
+            box-shadow: 0 0 30px rgba(0, 136, 204, 0.4), inset 0 0 20px rgba(0, 136, 204, 0.1);
+            border-color: #0088cc;
+        }
+
+        .social.twitter:hover {
+            box-shadow: 0 0 30px rgba(29, 155, 240, 0.4), inset 0 0 20px rgba(29, 155, 240, 0.1);
+            border-color: #1DA1F2;
+        }
+
+        .social.discord:hover {
+            box-shadow: 0 0 30px rgba(88, 101, 242, 0.4), inset 0 0 20px rgba(88, 101, 242, 0.1);
+            border-color: #5865F2;
+        }
+
+        .social.twitch:hover {
+            box-shadow: 0 0 30px rgba(145, 70, 255, 0.4), inset 0 0 20px rgba(145, 70, 255, 0.1);
+            border-color: #9146FF;
+        }
+
+        .social.kick:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.1);
+            border-color: #00ff00;
+        }
+
+        /* Footer - MEJORADO */
         footer {
-            background: linear-gradient(90deg, #111727 0%, #1a2139 100%);
-            padding: 30px 20px;
+            background: var(--header-bg);
+            padding: 40px 20px 30px;
             text-align: center;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.5);
-            margin-top: 40px;
+            position: relative;
+            margin-top: 60px;
+            border-top: 2px solid rgba(255,107,107,0.2);
+            z-index: 10;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
+            gap: 25px;
+            margin-bottom: 20px;
         }
 
         .social-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 20px;
+            transition: var(--transition);
+            font-size: 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .social-link img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            filter: invert(100%);
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .social-link:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.1);
+            border-color: var(--accent-color);
+            background: rgba(255,107,107,0.15);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link:hover img {
+            transform: scale(1.1);
         }
 
         .discord:hover {
-            background: rgba(88, 101, 242, 0.3);
-            border-color: rgba(88, 101, 242, 0.6);
+            background: rgba(88, 101, 242, 0.2);
+            border-color: #5865F2;
         }
 
         .youtube:hover {
-            background: rgba(255, 0, 0, 0.3);
-            border-color: rgba(255, 0, 0, 0.6);
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #FF0000;
         }
 
         .twitter:hover {
-            background: rgba(29, 155, 240, 0.3);
-            border-color: rgba(29, 155, 240, 0.6);
+            background: rgba(29, 155, 240, 0.2);
+            border-color: #1DA1F2;
         }
 
         .footer-text {
-            font-size: 12px;
-            color: #7a8399;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Responsive */
-        @media (max-width: 480px) {
+        /* Animaciones de entrada */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .social {
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .social:nth-child(1) { animation-delay: 0.1s; }
+        .social:nth-child(2) { animation-delay: 0.2s; }
+        .social:nth-child(3) { animation-delay: 0.3s; }
+        .social:nth-child(4) { animation-delay: 0.4s; }
+        .social:nth-child(5) { animation-delay: 0.5s; }
+        .social:nth-child(6) { animation-delay: 0.6s; }
+        .social:nth-child(7) { animation-delay: 0.7s; }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-gradient);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff6b6b, #ff8e8e);
+            border-radius: 6px;
+            border: 3px solid var(--primary-gradient);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff8787, #ffa0a0);
+        }
+
+        /* Responsive - MEJORADO */
+        @media (max-width: 768px) {
+            header {
+                font-size: 28px;
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                padding: 15px 15px 30px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
             .social {
-                padding: 8px;
-                gap: 8px;
+                padding: 14px 16px;
+                gap: 15px;
+            }
+
+            .social img {
+                width: 45px;
+                height: 45px;
+                padding: 6px;
+            }
+
+            .social-redes span {
+                font-size: 1.1rem;
+            }
+
+            .social-redes p {
+                font-size: 0.85rem;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-link img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 24px;
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                padding: 10px 10px 25px;
+            }
+
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .social {
+                padding: 12px 14px;
+                gap: 12px;
             }
 
             .social img {
                 width: 40px;
                 height: 40px;
-                padding: 3px;
+                padding: 5px;
             }
 
             .social-redes span {
@@ -261,123 +524,154 @@
             .social-redes p {
                 font-size: 0.8rem;
             }
-        }
-
-        @media (max-width: 768px) {
-            .social {
-                width: 95%;
-            }
-
-            .social-redes span {
-                font-size: 1.2rem;
-            }
-
-            .social-redes p {
-                font-size: 0.95rem;
-            }
 
             .social-links {
                 gap: 15px;
             }
 
             .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .social-link img {
+                width: 22px;
+                height: 22px;
+            }
+
+            .footer-text {
+                font-size: 12px;
             }
         }
+
+        /* Soporte para modo oscuro */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-gradient: linear-gradient(135deg, #080b12 0%, #141823 100%);
+            }
+        }
+
+        /* Mejora de accesibilidad */
+        .social:focus-visible,
+        .social-link:focus-visible,
+        .back-btn:focus-visible {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+
+        /* Estado activo para clicks */
+        .social:active {
+            transform: scale(0.98);
+        }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7207868307854402"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-<header onclick="location.href='index.html'"><i class="fas fa-star"></i> Aldex64 <i class="fas fa-star"></i></header>
+<header onclick="location.href='index.html'">
+    <i class="fas fa-star"></i> 
+    Aldex64 
+    <i class="fas fa-star"></i>
+</header>
 
 <div class="main-content">
-    <div class="back">
-        <a href="index.html" class="back-btn" style="font-family: Montserrat;">← Volver</a>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Volver al inicio
+    </a>
+
+    <h1>📱 Conéctate con Aldex64</h1>
+
+    <div class="socials-container">
+        <!-- YouTube -->
+        <a href="https://youtube.com/@aldex64" target="_blank" rel="noopener noreferrer" class="social youtube">
+            <img src="assets/youtube.svg" alt="YouTube" loading="lazy">
+            <div class="social-redes">
+                <span>YouTube</span>
+                <p>@Aldex64 · Suscríbete para tutoriales y gameplays</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
+
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@aldex.64?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="social tiktok">
+            <img src="assets/tik-tok.svg" alt="TikTok" loading="lazy">
+            <div class="social-redes">
+                <span>TikTok</span>
+                <p>@aldex.64 · Clips y contenido rápido</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/aldex_channel" target="_blank" rel="noopener noreferrer" class="social telegram">
+            <img src="assets/telegram.svg" alt="Telegram" loading="lazy">
+            <div class="social-redes">
+                <span>Telegram</span>
+                <p>AldexComunity · Canal oficial</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
+
+        <!-- Twitter / X -->
+        <a href="https://x.com/aldex64" target="_blank" rel="noopener noreferrer" class="social twitter">
+            <img src="assets/x.svg" alt="X/Twitter" loading="lazy">
+            <div class="social-redes">
+                <span>X / Twitter</span>
+                <p>@Aldex64 · Noticias y actualizaciones</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
+
+        <!-- Discord -->
+        <a href="https://discord.com/invite/NESqtHkvPw" target="_blank" rel="noopener noreferrer" class="social discord">
+            <img src="assets/discord.svg" alt="Discord" loading="lazy">
+            <div class="social-redes">
+                <span>Discord</span>
+                <p>La Cueva De Aldex · Comunidad gaming</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
+
+        <!-- Twitch -->
+        <a href="https://www.twitch.tv/aldex64" target="_blank" rel="noopener noreferrer" class="social twitch">
+            <img src="assets/twitch.svg" alt="Twitch" loading="lazy">
+            <div class="social-redes">
+                <span>Twitch</span>
+                <p>@Aldex64 · Lives y directos</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
+
+        <!-- Kick -->
+        <a href="https://www.kick.com/aldex64" target="_blank" rel="noopener noreferrer" class="social kick">
+            <img src="assets/kick.png" alt="Kick" loading="lazy">
+            <div class="social-redes">
+                <span>Kick</span>
+                <p>@Aldex64 · Streaming alternativo</p>
+            </div>
+            <i class="fas fa-external-link-alt" style="opacity: 0.7; font-size: 14px;"></i>
+        </a>
     </div>
-
-    <h1>Visita las Redes Sociales de Aldex</h1>
-
-    <!-- YouTube -->
-    <a href="https://youtube.com/@aldex64" class="social youtube">
-        <img src="assets/youtube.svg" alt="youtube">
-        <div class="social-redes">
-            <span>YouTube</span>
-            <p>@Aldex64</p>
-        </div>
-    </a>
-
-    <!-- TikTok -->
-    <a href="https://www.tiktok.com/@aldex.64?is_from_webapp=1&sender_device=pc" class="social tiktok">
-        <img src="assets/tik-tok.svg" alt="tiktok">
-        <div class="social-redes">
-            <span>TikTok</span>
-            <p>@aldex.64</p>
-        </div>
-    </a>
-
-    <!-- Telegram -->
-    <a href="https://t.me/aldex_channel" class="social telegram">
-        <img src="assets/telegram.svg" alt="telegram">
-        <div class="social-redes">
-            <span>Telegram</span>
-            <p>AldexComunity</p>
-        </div>
-    </a>
-
-    <!-- Twitter -->
-    <a href="https://x.com/aldex64" class="social twitter">
-        <img src="assets/x.svg" alt="twitter">
-        <div class="social-redes">
-            <span>X / Twitter</span>
-            <p>@Aldex64</p>
-        </div>
-    </a>
-
-    <!-- Discord -->
-    <a href="https://discord.gg/9NXDBAS3xn" class="social discord">
-        <img src="assets/discord.svg" alt="discord">
-        <div class="social-redes">
-            <span>Discord</span>
-            <p>La Cueva De Aldex</p>
-        </div>
-    </a>
-
-    <!-- Twitch -->
-    <a href="https://www.twitch.tv/aldex64" class="social twitch">
-        <img src="assets/twitch.svg" alt="twitch">
-        <div class="social-redes">
-            <span>Twitch</span>
-            <p>@Aldex64</p>
-        </div>
-    </a>
-
-    <!-- Kick -->
-    <a href="https://www.kick.com/aldex64" class="social kick">
-        <img src="assets/kick.png" alt="kick">
-        <div class="social-redes">
-            <span>Kick</span>
-            <p>@Aldex64</p>
-        </div>
-    </a>
 </div>
 
 <footer>
     <div class="social-links">
-        <a href="https://discord.gg/9NXDBAS3xn" target="_blank" class="social-link discord" title="Discord">
-            <img src="https://i.imgur.com/1pDObUV.png" alt="Discord">
+        <a href="https://discord.com/invite/NESqtHkvPw" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Únete a Discord" aria-label="Discord">
+            <img src="https://i.imgur.com/1pDObUV.png" alt="Discord" loading="lazy">
         </a>
-        <a href="https://youtube.com/@aldex64" target="_blank" class="social-link youtube" title="YouTube">
-            <img src="https://i.imgur.com/MdOlunX.png" alt="YouTube">
+        <a href="https://youtube.com/@aldex64" target="_blank" rel="noopener noreferrer" class="social-link youtube" title="Visita YouTube" aria-label="YouTube">
+            <img src="https://i.imgur.com/MdOlunX.png" alt="YouTube" loading="lazy">
         </a>
-        <a href="https://x.com/Aldex64?s=20" target="_blank" class="social-link twitter" title="X/Twitter">
-            <img src="https://i.imgur.com/CIfFbY3.png" alt="X">
+        <a href="https://x.com/Aldex64?s=20" target="_blank" rel="noopener noreferrer" class="social-link twitter" title="Síguenos en X" aria-label="X/Twitter">
+            <img src="https://i.imgur.com/CIfFbY3.png" alt="X" loading="lazy">
         </a>
     </div>
     <div class="footer-text">
-        <p>&copy; 2025 Aldex64. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Aldex64. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">Tu comunidad gaming de confianza</p>
     </div>
 </footer>
 
